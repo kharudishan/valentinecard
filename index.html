@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_corazón.svg/1024px-Heart_corazón.svg.png">
+<title>Valentine Question For You Amore Mio❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#ff4e8a,#ff9ac4);
+  overflow: hidden;
+  color: white;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+/* FLOATING HEARTS */
+.heart {
+  position: absolute;
+  font-size: 28px;
+  animation: float 8s linear infinite;
+}
+@keyframes float {
+  0% { transform: translateY(100vh);}
+  100% { transform: translateY(-10vh);}
+}
+
+/* CARD */
+.card {
+  background: rgba(255,255,255,0.15);
+  padding: 25px;
+  border-radius: 25px;
+  width: 90%;
+  max-width: 360px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(255,0,100,0.4);
+  animation: cardFloat 4s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes cardFloat {
+  50% { transform: translateY(-10px);}
+}
+
+/* BUTTONS */
+button {
+  padding: 14px 22px;
+  border:none;
+  border-radius:40px;
+  font-size:16px;
+  margin:10px;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:bold;
+}
+
+.yes {
+  background: linear-gradient(45deg,#ff0055,#ff7aa2);
+  color:white;
+  box-shadow: 0 0 15px rgba(255,0,80,0.7);
+}
+.no {
+  background:white;
+  color:#ff2e63;
+}
+button:hover {
+  transform: scale(1.1);
+}
+
+/* CONFETTI */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall 3s linear forwards;
+}
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* RESULT GIF */
+#result img {
+  width: 200px;
+  margin-top: 15px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255,0,100,0.7);
+}
+
+/* SIGNATURE */
+.signature {
+  margin-top: 12px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEARTS -->
+<div class="heart" style="left:10%;">💖</div>
+<div class="heart" style="left:30%; animation-delay:2s;">❤️</div>
+<div class="heart" style="left:60%; animation-delay:4s;">💗</div>
+<div class="heart" style="left:80%; animation-delay:1s;">💕</div>
+
+<div class="card" id="card">
+  <h2 id="question">Will you be my Valentines Amore mio? 💖</h2>
+
+  <button class="yes" id="yesBtn" onclick="yesClick()">Sì</button>
+  <button class="no" onclick="noClick()">No</button>
+
+  <!-- GIF container -->
+  <div id="result" style="display:none;">
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Bear Kiss">
+  </div>
+</div>
+
+<div class="signature">
+  Hardcoded by Anjule Herath 💻❤️
+</div>
+
+<script>
+let count = 0;
+let yesSize = 16;
+
+const msgs = [
+"Sei sicura? 🥺",
+"Davvero sicura?? 😢",
+"Ma proprio sicura sicura? 😭",
+"Ultima possibilità amore mio😳",
+"Sei sicurissima amore?😔",
+"Pensaci bene 💭",
+"Sicura al 100%? 😅",
+"Amore dai 😜",
+"Non puoi dire no 😂",
+"Ci riprovo…",
+"Forse volevi dire sì?",
+"Ancora no? 😆",
+"Guarda il bottone Sì 👀",
+"È gigante ormai 🤣",
+"Si Neh?😎"
+];
+
+function noClick(){
+  const q = document.getElementById("question");
+  const yesBtn = document.getElementById("yesBtn");
+
+  if(count < msgs.length){
+    q.innerText = msgs[count];
+  } else {
+    q.innerText = "Non puoi scappare amore hehehe 😏";
+  }
+
+  count++;
+  yesSize += 6;
+  yesBtn.style.fontSize = yesSize + "px";
+  yesBtn.style.padding = (14 + count*2) + "px";
+}
+
+function yesClick(){
+  document.getElementById("question").innerText="LO SAPEVOOO YAYYY TI AMO BABYYY❤️🎉";
+  document.querySelector(".no").style.display="none";
+  document.getElementById("yesBtn").style.display="none";
+
+  // show the GIF
+  document.getElementById("result").style.display="block";
+
+  popConfetti();
+}
+
+/* CONFETTI PARTY */
+function popConfetti(){
+  for(let i=0;i<120;i++){
+    const conf = document.createElement("div");
+    conf.className="confetti";
+    conf.style.left = Math.random()*100+"vw";
+    conf.style.background = randomColor();
+    conf.style.animationDuration = (2+Math.random()*2)+"s";
+    document.body.appendChild(conf);
+
+    setTimeout(()=>conf.remove(),4000);
+  }
+}
+
+function randomColor(){
+  const colors=["#ff0","#0ff","#f0f","#fff","#ff69b4","#00ff88"];
+  return colors[Math.floor(Math.random()*colors.length)];
+}
+</script>
+
+</body>
+</html>
